@@ -20,7 +20,8 @@ $ npm install
 $ npm start
 
 # O servidor inciará na porta:3001 - acesse <http://localhost:3001>
-# Existe um arquivo .env_example com a porta padrão do projeto, caso tenha necessidade copie o arquivo e cole como .env e coloque o valor da porta desejada
+# Existe um arquivo .env_example com a porta padrão do projeto,
+# caso tenha necessidade copie o arquivo e cole como .env e coloque o valor da porta desejada
 ```
 
 ### 🎲 Rodando Reactjs (aplicação)
