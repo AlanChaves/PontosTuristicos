@@ -225,7 +225,7 @@ const NewPontoPage: React.FC = () => {
                                     fullWidth
                                     {...register("reference", { required: "Referência obrigatória" })}
                                     inputProps={{
-                                        maxLength: 244,
+                                        maxLength: 100,
                                     }}
                                 />
                                 <ErrorMessage
@@ -241,9 +241,12 @@ const NewPontoPage: React.FC = () => {
                                 <TextField
                                     type="text"
                                     fullWidth
-                                    multiline
                                     label={"Descrição"}
                                     {...register("description", { required: "Descrição obrigatória" })}
+                                    inputProps={{
+                                        maxLength: 100,
+                                    }}
+                                    multiline
                                     rows={3}
                                 />
                                 <ErrorMessage

@@ -1,4 +1,4 @@
-<p align="center">Este projeto foi constuido em: <a href="https://sqlite.org/">🔗 SQLite</a> | <a href="https://nodejs.org/pt-br/">🔗 Nodejs</a> | <a href="https://pt-br.reactjs.org/">🔗 Reactjs</a></p>
+<p align="center">Este projeto foi constuido em <a href="https://sqlite.org/">🔗 SQLite</a> | <a href="https://nodejs.org/pt-br/">🔗 Nodejs</a> | <a href="https://pt-br.reactjs.org/">🔗 Reactjs</a></p>
 
 <h4 align="center"> 
 	🚧  Pontos Turísticos do Brasil  🚧
