@@ -122,15 +122,15 @@ const HomePage: React.FC = () => {
                     type="button"
                     variant="text"
                     onClick={() => {
-                        const totalPage = Math.floor(watchCount / watchTotal);
-                        if (watchPage < totalPage) {
+                        const totalPage = Math.ceil(watchCount / watchTotal);
+                        if (watchPage < (totalPage - 1)) {
                             setValue("page", watchPage + 1);
                         }
                     }}
                 >
                     Próximo
                 </Button>
-                <Typography variant="h6">{`Pág. ${watchPage + 1} de ${(Math.floor(watchCount / watchTotal) + 1).toFixed(0)} / Total de itens ${watchCount}`}</Typography>
+                <Typography variant="h6">{`Pág. ${watchPage + 1} de ${(Math.ceil(watchCount / watchTotal)).toFixed(0)} / Total de itens ${watchCount}`}</Typography>
             </Stack>
         </Box>)
     }
