@@ -17,7 +17,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from 'react-query'
-import api from "../../services/api";
+import { api } from "../../services/api";
 import IPonto from "../../interfaces/ponto";
 
 const HomePage: React.FC = () => {
@@ -43,11 +43,17 @@ const HomePage: React.FC = () => {
     const watchCount = watch("count");
 
     const getPontos = async () => {
-        const url = `/pontos?_page=${watchPage}&_total=${watchTotal}&_search=${watchSearch}`;
+        let url = `/pontos?PageNumber=${watchPage}&PageSize=${watchTotal}`;
+
+        if (watchSearch !== "") {
+            url += `&Search=${watchSearch}`;
+        }
+        //const url = `/pontos?PageNumber=${watchPage}&PageSize=${watchTotal}`;
         const response = await api.get(url);
         const pkg = response.data;
-        setValue("count", pkg.data.count);
-        return pkg.data.data;
+        console.log(pkg);
+        setValue("count", pkg.Count);
+        return pkg.Data;
     }
 
     const { data, isLoading, isError, refetch } = useQuery("pontos", getPontos);
@@ -80,9 +86,9 @@ const HomePage: React.FC = () => {
                 direction={"column"}
                 sx={{ width: "100%" }}
             >
-                <Typography variant="h5">{item.name}</Typography>
-                <Typography>{item.description}</Typography>
-                <Typography>{`${item.city} / ${item.state}`}</Typography>
+                <Typography variant="h5">{item.Name}</Typography>
+                <Typography>{item.Description}</Typography>
+                <Typography>{`${item.City} / ${item.State}`}</Typography>
                 {/*<Typography>{item.reference}</Typography>*/}
                 <Stack
                     direction={"row"}
@@ -93,7 +99,7 @@ const HomePage: React.FC = () => {
                         color="primary"
                         type="button"
                         variant="contained"
-                        onClick={() => Navigation(`/ponto/${item.id}`)}
+                        onClick={() => Navigation(`/ponto/${item.Id}`)}
                     >
                         Ver Detalhes
                     </Button>
@@ -222,7 +228,7 @@ const HomePage: React.FC = () => {
             </Backdrop>
             <Snackbar open={isError || false} autoHideDuration={6000}>
                 <Alert severity="error" sx={{ width: "100%" }}>
-                    Erro ao tentar cadastrar buscar pontos
+                    Erro ao tentar buscar pontos
                 </Alert>
             </Snackbar>
         </>

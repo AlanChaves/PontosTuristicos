@@ -1,8 +1,9 @@
 export default interface IPonto {
-    id: number;
-    name: string;
-    description: string;
-    reference: string;
-    state: string;
-    city: string;
+    Id: number;
+    Name: string;
+    Description: string;
+    Reference: string;
+    State: string;
+    City: string;
+    InsertedAt: Date;
 }
