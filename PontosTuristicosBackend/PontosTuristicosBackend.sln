@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PontosTuristicosBackend", "PontosTuristicosBackend\PontosTuristicosBackend.csproj", "{5F6DF427-F722-4B17-AAB8-DDABE3C77DA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F6DF427-F722-4B17-AAB8-DDABE3C77DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6DF427-F722-4B17-AAB8-DDABE3C77DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6DF427-F722-4B17-AAB8-DDABE3C77DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6DF427-F722-4B17-AAB8-DDABE3C77DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE0B6069-B084-4BA7-AD41-B92A7988D385}
+	EndGlobalSection
+EndGlobal

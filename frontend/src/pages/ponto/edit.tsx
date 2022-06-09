@@ -24,7 +24,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ICity from "../../interfaces/city";
 import IState from "../../interfaces/state";
 import IPonto from "../../interfaces/ponto";
-import api from "../../services/api";
+import { api } from "../../services/api";
 import apiCidades from "../../services/api-cidades";
 
 const EditPontoPage: React.FC = () => {
@@ -40,29 +40,30 @@ const EditPontoPage: React.FC = () => {
     const [cities, setCities] = React.useState<ICity[]>([]);
 
     const [ponto, setPonto] = React.useState<IPonto>({
-        id: 0,
-        name: "",
-        description: "",
-        state: "",
-        city: "",
-        reference: ""
+        Id: 0,
+        Name: "",
+        Description: "",
+        State: "",
+        City: "",
+        Reference: "",
+        InsertedAt: new Date(),
     });
 
     const { register, watch, handleSubmit, formState: { errors }, setValue } = useForm<IPonto>({
         defaultValues: {
-            id: Number(id),
+            Id: Number(id),
         }
     });
 
-    const watchState = watch("state");
-    const watchCity = watch("city");
+    const watchState = watch("State");
+    const watchCity = watch("City");
 
     const getPonto = async () => {
         setLoading(true);
         try {
-            const url = `/ponto/${id}`;
+            const url = `/pontos/${id}`;
             const response = await api.get(url);
-            const pkg = response.data.data;
+            const pkg = response.data;
             setPonto(pkg);
         } finally {
             setLoading(false);
@@ -77,11 +78,12 @@ const EditPontoPage: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
-        setValue("name", ponto.name);
-        setValue("description", ponto.description);
-        setValue("reference", ponto.reference);
-        setValue("state", ponto.state);
-        setValue("city", ponto.city);
+        setValue("Name", ponto.Name);
+        setValue("Description", ponto.Description);
+        setValue("Reference", ponto.Reference);
+        setValue("State", ponto.State);
+        setValue("City", ponto.City);
+        setValue("InsertedAt", ponto.InsertedAt);
     }, [ponto]);
 
     const getStates = async () => {
@@ -115,6 +117,9 @@ const EditPontoPage: React.FC = () => {
                 }
             });
             if (cityId > 0) {
+                if (watchState !== ponto.State) {
+                    setValue("City", "");
+                }
                 getCities(cityId);
             }
         }
@@ -125,7 +130,7 @@ const EditPontoPage: React.FC = () => {
         setError(false);
         setSuccess(false);
         try {
-            const response = await api.patch(`/ponto/${id}`, data);
+            const response = await api.post(`/pontos/${id}`, data);
             console.log(response);
             setSuccess(true);
         } catch (e) {
@@ -183,7 +188,7 @@ const EditPontoPage: React.FC = () => {
                                 <TextField
                                     type="text"
                                     label="Nome"
-                                    {...register("name", { required: "Nome obrigatório" })}
+                                    {...register("Name", { required: "Nome obrigatório" })}
                                     fullWidth
                                     inputProps={{
                                         maxLength: 100,
@@ -191,7 +196,7 @@ const EditPontoPage: React.FC = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="name"
+                                    name="Name"
                                     render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                 />
                             </Stack>
@@ -210,7 +215,7 @@ const EditPontoPage: React.FC = () => {
                                             labelId="uf-select-label"
                                             id="uf-select"
                                             label="Estado"
-                                            {...register("state", { required: "Estado obrigatório" })}
+                                            {...register("State", { required: "Estado obrigatório" })}
                                             value={watchState}
                                         >
                                             {states.map((item) => (
@@ -222,7 +227,7 @@ const EditPontoPage: React.FC = () => {
                                     </FormControl>
                                     <ErrorMessage
                                         errors={errors}
-                                        name="state"
+                                        name="State"
                                         render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                     />
                                 </Stack>
@@ -239,7 +244,7 @@ const EditPontoPage: React.FC = () => {
                                             labelId="cidade-select-label"
                                             id="cidade-select"
                                             label="Cidade"
-                                            {...register("city", { required: "Cidade obrigatória" })}
+                                            {...register("City", { required: "Cidade obrigatória" })}
                                             value={watchCity}
                                         >
                                             {cities.map((item) => (
@@ -251,7 +256,7 @@ const EditPontoPage: React.FC = () => {
                                     </FormControl>
                                     <ErrorMessage
                                         errors={errors}
-                                        name="city"
+                                        name="City"
                                         render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                     />
                                 </Stack>
@@ -264,14 +269,14 @@ const EditPontoPage: React.FC = () => {
                                     type="text"
                                     label="Referência"
                                     fullWidth
-                                    {...register("reference", { required: "Referência obrigatória" })}
+                                    {...register("Reference", { required: "Referência obrigatória" })}
                                     inputProps={{
                                         maxLength: 100,
                                     }}
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="reference"
+                                    name="Reference"
                                     render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                 />
                             </Stack>
@@ -283,7 +288,7 @@ const EditPontoPage: React.FC = () => {
                                     type="text"
                                     fullWidth
                                     label={"Descrição"}
-                                    {...register("description", { required: "Descrição obrigatória" })}
+                                    {...register("Description", { required: "Descrição obrigatória" })}
                                     inputProps={{
                                         maxLength: 100,
                                     }}
@@ -292,7 +297,7 @@ const EditPontoPage: React.FC = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="description"
+                                    name="Description"
                                     render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                 />
                             </Stack>

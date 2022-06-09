@@ -23,7 +23,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import ICity from "../../interfaces/city";
 import IState from "../../interfaces/state";
-import api from "../../services/api";
+import { api } from "../../services/api";
 import apiCidades from "../../services/api-cidades";
 
 const NewPontoPage: React.FC = () => {
@@ -38,14 +38,14 @@ const NewPontoPage: React.FC = () => {
     const [cities, setCities] = React.useState<ICity[]>([]);
 
     const { register, watch, handleSubmit, formState: { errors }, } = useForm<{
-        name: string;
-        description: string;
-        reference: string;
-        state: string;
-        city: string;
+        Name: string;
+        Description: string;
+        Reference: string;
+        State: string;
+        City: string;
     }>();
 
-    const watchState = watch("state");
+    const watchState = watch("State");
 
     React.useEffect(() => {
         setAnimationState(true);
@@ -94,7 +94,7 @@ const NewPontoPage: React.FC = () => {
         setError(false);
         setSuccess(false);
         try {
-            const response = await api.post('/ponto', data);
+            const response = await api.post('/pontos', data);
             console.log(response);
             setSuccess(true);
         } catch (e) {
@@ -152,7 +152,7 @@ const NewPontoPage: React.FC = () => {
                                 <TextField
                                     type="text"
                                     label="Nome"
-                                    {...register("name", { required: "Nome obrigatório" })}
+                                    {...register("Name", { required: "Nome obrigatório" })}
                                     fullWidth
                                     inputProps={{
                                         maxLength: 100,
@@ -160,7 +160,7 @@ const NewPontoPage: React.FC = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="name"
+                                    name="Name"
                                     render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                 />
                             </Stack>
@@ -179,14 +179,14 @@ const NewPontoPage: React.FC = () => {
                                             labelId="uf-select-label"
                                             id="uf-select"
                                             label="Estado"
-                                            {...register("state", { required: "Estado obrigatório" })}
+                                            {...register("State", { required: "Estado obrigatório" })}
                                         >
                                             {states.map((item) => (<MenuItem value={item.sigla}>{item.nome}</MenuItem>))}
                                         </Select>
                                     </FormControl>
                                     <ErrorMessage
                                         errors={errors}
-                                        name="state"
+                                        name="State"
                                         render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                     />
                                 </Stack>
@@ -203,14 +203,14 @@ const NewPontoPage: React.FC = () => {
                                             labelId="cidade-select-label"
                                             id="cidade-select"
                                             label="Cidade"
-                                            {...register("city", { required: "Cidade obrigatória" })}
+                                            {...register("City", { required: "Cidade obrigatória" })}
                                         >
                                             {cities.map((item) => (<MenuItem value={item.nome}>{item.nome}</MenuItem>))}
                                         </Select>
                                     </FormControl>
                                     <ErrorMessage
                                         errors={errors}
-                                        name="city"
+                                        name="City"
                                         render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                     />
                                 </Stack>
@@ -223,14 +223,14 @@ const NewPontoPage: React.FC = () => {
                                     type="text"
                                     label="Referência"
                                     fullWidth
-                                    {...register("reference", { required: "Referência obrigatória" })}
+                                    {...register("Reference", { required: "Referência obrigatória" })}
                                     inputProps={{
                                         maxLength: 100,
                                     }}
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="reference"
+                                    name="Reference"
                                     render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                 />
                             </Stack>
@@ -242,7 +242,7 @@ const NewPontoPage: React.FC = () => {
                                     type="text"
                                     fullWidth
                                     label={"Descrição"}
-                                    {...register("description", { required: "Descrição obrigatória" })}
+                                    {...register("Description", { required: "Descrição obrigatória" })}
                                     inputProps={{
                                         maxLength: 100,
                                     }}
@@ -251,7 +251,7 @@ const NewPontoPage: React.FC = () => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="description"
+                                    name="Description"
                                     render={({ message }) => <p style={{ color: "red" }}>{message}</p>}
                                 />
                             </Stack>
